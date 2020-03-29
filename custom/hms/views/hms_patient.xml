@@ -1,0 +1,38 @@
+<odoo>
+ 
+<record model="ir.ui.view" id="patients_tree_view">
+<field name="name">patients</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree string="List Patients">
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="age"/>
+                    <field name="image"/>
+
+                </tree>
+            </field>
+</record> 
+<record model="ir.ui.view" id="patient_form_view">
+    <field name="name">patient</field>
+    <field name="model">hms.patient</field>
+    <field name="arch" type="xml">
+        <form string="Patient Data">
+            <field name="first_name"/>
+            <field name="last_name"/>
+            <field name="age"/>
+            <field name="image"/>
+        </form>
+    </field>
+</record> 
+
+<record model="ir.actions.act_window" id="action_list_patients">
+    <field name="name">patients</field>
+    <field name="res_model">hms.patient</field>     
+</record>
+<menuitem id="menu_hms" name="HMS" 
+          />
+<menuitem id="menu_patients" name="Patients" parent="menu_hms"
+          action="action_list_patients"/>
+</odoo>
+
