@@ -1,38 +1,67 @@
 <odoo>
- 
-<record model="ir.ui.view" id="patients_tree_view">
-<field name="name">patients</field>
-            <field name="model">hms.patient</field>
-            <field name="arch" type="xml">
-                <tree string="List Patients">
-                    <field name="first_name"/>
-                    <field name="last_name"/>
-                    <field name="age"/>
-                    <field name="image"/>
+    <record model="ir.ui.view" id="patients_tree_view">
+        <field name="name">patients</field>
+        <field name="model">hms.patients</field>
+        <field name="arch" type="xml">
+            <tree string="List Patients">
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="age"/>
+                <field name="blood_type" />
+                <field name="department"/>
+                <field name="doctor"/>
+                <field name="state"/>
 
-                </tree>
-            </field>
-</record> 
-<record model="ir.ui.view" id="patient_form_view">
-    <field name="name">patient</field>
-    <field name="model">hms.patient</field>
-    <field name="arch" type="xml">
-        <form string="Patient Data">
-            <field name="first_name"/>
-            <field name="last_name"/>
-            <field name="age"/>
-            <field name="image"/>
-        </form>
-    </field>
-</record> 
 
-<record model="ir.actions.act_window" id="action_list_patients">
-    <field name="name">patients</field>
-    <field name="res_model">hms.patient</field>     
-</record>
-<menuitem id="menu_hms" name="HMS" 
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="patient_form_view">
+        <field name="name">patient</field>
+        <field name="model">hms.patients</field>
+        <field name="arch" type="xml">
+            <form string="Patient Data">
+                <sheet>
+                    <group string="Patient Data">
+                        <group string="Basic Data">
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="age"/>
+                            <field name="PCR" />
+                            <field name="blood_type" />
+                        </group>
+                        <group string="Extra Data">
+                            <field name="image"/>
+                            <field name="CR_Ratio"/>
+                             <field name="department"/>
+                             <field name="doctor"/>
+                             <field name="state"/>
+                             <!-- <field name="log_history"/> -->
+
+                        <field name="changed" attrs="{'invisible': True}"/>
+
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="history" >
+                            <field name="history" attrs="{'invisible': 'changed'}"/>
+                        </page>
+                        <page string="address" >
+                            <field  name="address"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_list_patients">
+        <field name="name">patients</field>
+        <field name="res_model">hms.patients</field>
+    </record>
+    <menuitem id="menu_hms" name="HMS" 
           />
-<menuitem id="menu_patients" name="Patients" parent="menu_hms"
+    <menuitem id="menu_patients" name="Patients" parent="menu_hms"
           action="action_list_patients"/>
 </odoo>
 
